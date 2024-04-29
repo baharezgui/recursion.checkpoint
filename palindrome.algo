@@ -1,0 +1,28 @@
+FUNCTION palindrome(str: STRING) : BOOLEAN
+VAR
+    longeur, i: INTEGER
+    newstr: STRING  // Declare newstr before using it
+
+BEGIN
+    longeur := str.length
+    
+    // Base case: If the length of the string is 0 or 1, it's a palindrome
+    IF (longeur = 0 OR longeur = 1) THEN
+        RETURN true;
+    END_IF
+    
+    // If the first and last characters match, continue checking recursively
+    IF (str[0] = str[longeur-1]) THEN
+        // Create a new string without the first and last characters
+        FOR i FROM 1 TO longeur-2 DO
+            newstr[i-1] := str[i];
+        END_FOR
+        
+        // Recursive call to check if the substring is a palindrome
+        RETURN palindrome(newstr);
+        
+    ELSE
+        // If the first and last characters don't match, it's not a palindrome
+        RETURN false;
+    END_IF
+END
